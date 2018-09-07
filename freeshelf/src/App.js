@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import './App.css'
 import books from './books.json'
-import './bookentry.js'
+import Bookentry from './Bookentry.js'
 
 class App extends Component {
   constructor () {
     super()
-    this.state = { books }
+    this.state = { books: books }
   }
   render () {
-
     return (
-      <div className='App' />
+      <div>
+        { this.state.books.map((book, idx) => <Bookentry key={idx} book={book} />)}
+      </div>
     )
   }
 }
