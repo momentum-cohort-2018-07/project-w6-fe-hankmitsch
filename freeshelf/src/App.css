@@ -3,6 +3,7 @@ body {
 }
 .book-info {
   padding: 10px;
+  margin: 20px;
 }
 .book-title {
   font-weight: bolder;
@@ -12,5 +13,11 @@ body {
 }
 .book-cover {
   max-width: 100px;
-  float: right;
+  box-shadow: 1px 1px 1px 1px #a7a7a7;
+}
+#hide-show {
+  cursor: pointer;
+  margin: 4px;
+  margin-left: 10px;
+  color: rgb(190, 188, 207);
 }

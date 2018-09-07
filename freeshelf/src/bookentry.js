@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import App from './App.js'
+// import Addbook from './Addbook'
 
 class Bookentry extends Component {
-  constructor (props) {
+  constructor () {
     super()
     this.state = {
-      showDetail: false
+      showDetail: false,
+      isEditing: false
     }
   }
 
-  handleClick (e) {
+  handleClick () {
     this.state.showDetail ? this.setState({ showDetail: false }) : this.setState({ showDetail: true })
+  }
+
+  editBook (book) {
+    this.setState({
+      isEditing: true
+    })
   }
 
   render () {
@@ -23,15 +31,16 @@ class Bookentry extends Component {
           <div className='book-author'> { book.author } </div>
           <div className='book-description-short'> { book.shortDescription } </div>
           {this.state.showDetail ? (<div>
-            <button id='hide-show' onClick={(e) => this.handleClick(e)}>Less Information</button>
+            <div id='hide-show' onClick={(e) => this.handleClick(e)}>. . . Less Information</div>
             <div className='moreInfo'>
               <div className='book-url'>URL: { book.url} </div>
               <div className='book-date'>Date published: { book.publicationDate } </div>
               <div className='book-description-full'>Full Description: { book.detailedDescription } </div>
+              <button className='edit-book' onClick={() => this.editBook(book)}>Edit Book</button>
             </div>
           </div>
           )
-            : <button id='hide-show' onClick={(e) => this.handleClick(e)}>More Information</button> }
+            : <div id='hide-show' onClick={() => this.handleClick()}>More Information . . .</div> }
         </div>
       </div>
     )
