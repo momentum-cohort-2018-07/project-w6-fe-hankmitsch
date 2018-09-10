@@ -11,6 +11,13 @@ class AddBook extends Component {
       publicationDate: document.getElementById('newDate').value,
       detailedDescription: document.getElementById('newBook-description-full')
     }
+
+    addBookToApi (newBookInfo) {
+        request.put(`http://localhost:3001/books`)
+          .send(newBookInfo)
+          .then(console.log (new book added!))
+    }
+
     return (
       <form>
         <label>Title:<input type='text' name='name' id='newTitle' /></label>
@@ -19,7 +26,7 @@ class AddBook extends Component {
         <label>URL:<input type='text' name='name' id='newUrl' /></label>
         <label>Date Published:<input type='text' name='name' id='newDate' /></label>
         <label>Full Description:<input type='text' name='name' id='newBook-description-full' /></label>
-        <input type='submit' value='Submit' />
+        <input type='submit' value='Submit' onClick={() => this.addBookToApi()}/>
       </form>
     )
   }
