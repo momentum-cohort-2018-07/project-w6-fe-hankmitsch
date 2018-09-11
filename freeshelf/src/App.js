@@ -20,31 +20,38 @@ class App extends Component {
       })
   }
 
-  addBookToApi () {
-    
-  }
-  //   if(this.state.showMe) {
-  //     return (<div> one div </div>);
-  // } else {
-  //     return (<a onClick={this.onClick}> press me </a>);
-  // }
   addBook () {
     this.setState({
       addBook: true
     })
   }
 
+  updateBook (bookID, field, value) {
+    const idx = this.state.books.findIndex(book => book.id === bookID)
+    if (idx === -1) { return }
+    this.setState(state => {
+      state.books[idx][field] = value
+      return { books: state.books }
+    })
+  }
+
+  updateBookinApi (book) {
+    request.put(`http://localhost:3001/books/${book.id}`)
+      .send(book)
+  }
+
   render () {
-    if (this.state.addBook === true) {
-      return (<AddBook />)
-    } else {
-      return (
+    return (this.state.addBook
+      ? <AddBook />
+      : (
         <div>
-          { this.state.books.map((book) => <Bookentry key={book.id} book={book} />)}
+          { this.state.books.map((book) =>
+            <Bookentry key={book.id} book={book}
+              updateBook={(field, value) => this.updateBook(book.id, field, value)} />)}
           <button onClick={() => this.addBook()}>Add Book</button>
         </div>
       )
-    }
+    )
   }
 }
 
